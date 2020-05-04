@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let strs = ["abca","aba","aaab"];
+    // ["flower","flow","flight"]
+    // ["dog","racecar","car"]
+    // ["pro","problem","professional"]
+    // ["a"]
+    // []
+    // ["c", "c"]
+    // ["aac","a","ccc"]
+    // [""]
+    // ["abca","aba","aaab"]
+    (function(strs) {
+        let smallestWord = strs.length > 0 ? strs[0] : "";
+        strs.forEach(a => {
+            smallestWord = a.length < smallestWord.length ? a : smallestWord;
+        })
+        debugger
+        let tempIndex = -1;
+        let substrIndex = 9999;
+        let i = j = 0;
+        while(smallestWord.length > 0 && i < strs.length) {
+            if(j === 0 && strs[i][j] !== smallestWord[j]) {
+                substrIndex = -9999;
+                break;
+            }
+            if(strs[i][j] === smallestWord[j]) {
+                tempIndex++;
+            }
+            if(j === smallestWord.length-1) {
+                substrIndex = tempIndex <= substrIndex ? tempIndex : substrIndex;
+                smallestWord = smallestWord.substring(0, substrIndex+1);
+                j = -1;
+                tempIndex = -1;
+                i++;
+            }   
+            j++;
+        }
+        let answer = smallestWord === "" ? smallestWord : substrIndex < 0 ? "" : smallestWord.substring(0, substrIndex+1);
+        console.log(answer);
+        // console.log(smallestWord)
+    })(strs)
+    </script>
+</body>
+</html>

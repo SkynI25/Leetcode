@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let param = "asjrgapa";
+        //bbbbb
+        //dvdf
+        //au
+        //abcabcbba
+        //" "
+        //asjrgapa
+
+        (function(param) {
+            let ans = i = j = 0;
+            let ans2 = 0;
+            let n = param.length;
+            let set = new Set();
+
+            while(j < n && i < n) {
+                if(!set.has(param[j])) {
+                    set.add(param[j++]);
+                    ans = j-i > ans ? j-i : ans;
+                    ans2 = set.size > ans2 ? set.size : ans2;
+                } else {
+                    set.delete(param[i++]);
+                }
+            }
+
+            console.log(ans, ans2, set);
+
+        })(param)
+
+        (function(param) {
+            let substring = "";
+            let answer = 0;
+            let realAnswer = 0;
+
+            for(let i = 0; i < param.length; i++) {
+                for(let j = i; j < param.length; j++) {
+                    let countBool = 0;
+                    for(let charAnswer of substring) {
+                        ++countBool;
+                        if(param[j] === charAnswer) {
+                            substring = "";
+                        }
+                    }
+                    if(substring.length === 0 || countBool === substring.length) {
+                        substring += param[j];
+                    }
+                    if(substring.length > answer) {
+                        answer = substring.length;
+                    }
+                }
+                if(realAnswer < answer) {
+                    realAnswer = answer;
+                }
+                substring = "";
+            }
+
+            console.log(realAnswer);
+            
+        })(param)
+
+        /* (function(param) {
+            let substring = "";
+            let answer1 = 0;
+            let answer2 = 0;
+            let realAnswer = 0;
+
+            
+
+            if(param.length < 2) {
+                answer1 = param.length;
+            } else {
+                for(let i = param.length-1; i>=0; i--) {
+                    let countBool = 0;
+                    for(let charAnswer of substring) {
+                        ++countBool;
+                        if(param[i] === charAnswer) {
+                            substring = "";
+                        }
+                    }
+                    if(substring.length === 0 || countBool === substring.length) {
+                        substring += param[i];
+                    }
+                    if(substring.length > answer1) {
+                        answer1 = substring.length;
+                    }
+                }
+            }
+
+            for(let charParam of param) {
+                let countBool = 0;                
+                for(let charAnswer of substring) {
+                    ++countBool;
+                    if(charParam === charAnswer) {
+                        substring = "";
+                    }
+                }
+                if(substring.length === 0 || countBool === substring.length) {
+                    substring += charParam;
+                }
+                if(substring.length > answer2) {
+                    answer2 = substring.length;
+                }
+            }
+
+            realAnswer = answer1 > answer2 ? answer1 : answer2;
+
+            console.log(answer1, answer2);
+        })(param) */
+    
+    </script>
+</body>
+</html>

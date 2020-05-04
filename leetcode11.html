@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let height = [1,1];
+        // [1,2,3,4,5,5,8,6,1]
+        // [1,1]
+        (function() {
+            let i = 0;
+            let j = height.length-1;
+            let qty = answer = 0;
+            // debugger
+            while(i<height.length && j >= 0 && j-i >= 1) {
+                qty = (j-i) * (height[i] < height[j] ? height[i] : height[j]);
+                answer = qty > answer ? qty : answer;
+                if(height[i] >= height[j]) j--;
+                else i++;
+            }
+            console.log(answer);
+        })(height)
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6];
+
+        // [99, -99, 0, 1, 1, -2]
+        // [1,2,3,4,-1,-1]
+        // [-1,-2,-3,4,1,1]
+        // [-1, 0, 1, 2, -1, -4]
+        // [0,0,0,0,0,0]
+        // [0]
+        // [1, 2]
+        // [-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]
+        // [-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0]
+        // [4,4,3,-5,0,0,0,-2,3,-5,-5,0]
+        // [-2,0,3,-1,4,0,3,4,1,1,1,-3,-5,4,0]
+
+        (function(nums) {
+            let sortedArr = nums.sort((a,b) => a > b ? 1 : a < b ? -1 : 0);
+            let answerArr = [];
+
+            for(let i = 0; i < sortedArr.length-2; i++) {
+                debugger
+                if(i === 0 || (i > 0 && sortedArr[i] !== sortedArr[i-1])) {
+                    let low = i+1;
+                    let high = sortedArr.length-1;
+                    let sum = 0 - sortedArr[i];
+
+                    while(low < high) {
+                        if(sortedArr[low] + sortedArr[high] === sum) {
+                            answerArr.push([sortedArr[low], sortedArr[high], sortedArr[i]]);
+                            while(low < high && sortedArr[low] === sortedArr[low+1]) low++;
+                            while(low < high && sortedArr[high] === sortedArr[high+1]) high--;
+                            low++;
+                            high--;
+                        } else if(sortedArr[low] + sortedArr[high] > sum) high--;
+                        else low++;
+                    }
+                }
+            }
+            console.log(answerArr)
+        })(nums)
+
+        /* (function(nums) {
+            // debugger
+            let answerArr = [];
+            if(nums.length > 2 && nums.every(el => el === 0)) {
+                answerArr.push([0,0,0]);
+            } else {
+                for(let i = 0; i < nums.length; i++) {
+                    let result = 0;
+                    for(let j = i; j < nums.length; j++) {
+                        if(j !== i) {
+                            result = nums[i] + nums[j];
+                            if(nums.find((el, idx) => idx !== i && idx !== j && el === -result) !== undefined ? true : false) {
+                                result = result === 0 ? 0 : -result;
+                                answerArr.push([nums[i], nums[j], result]);
+                            }
+                            result = 0;
+                        }
+                    }
+                }
+                // let idxSet = new Set();
+                for(let i = 0; i < answerArr.length; i++) {
+                    let set = new Set();
+                    let sentinelBool = false;
+                    set.add(answerArr[i][0])
+                    .add(answerArr[i][1])
+                    .add(answerArr[i][2]);
+                    for(let j = i+1; j < answerArr.length; j++) {
+                        // if(i == 7) debugger
+                        if(answerArr[j].length > 0) {
+                            if(answerArr[j].every(el => set.has(el))) {
+                                if(set.size > 1 && answerArr[j].every(el => el === 0) && !sentinelBool) {
+                                    // debugger
+                                    sentinelBool = true;
+                                    continue;
+                                }
+                                // idxSet.add(j);
+                                answerArr.splice(j, 1, []);
+                            }
+                        }
+                    }
+                }
+
+                // for(let idx of idxSet) answerArr.splice(idx, 1, []);
+                answerArr = answerArr.filter(el => el.length !== 0);
+            }
+            console.log(answerArr)
+        })(nums) */
+    </script>
+</body>
+</html>

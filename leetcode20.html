@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s = "}}";
+        (function (s) {
+            let answer = s.length % 2 === 0 ? true : false;
+            let parenthesesMap = new Map([
+                [")", "("],
+                ["]", "["],
+                ["}", "{"],
+            ]);
+            let parenthesesSet = new Set();
+            parenthesesSet.add("(").add("{").add("[");
+            let parenthesesMemory = [];
+
+            for(let i = 0; i < s.length; i++) {
+                if(parenthesesSet.has(s[i])) parenthesesMemory.push(s[i]);
+                else {
+                    if(parenthesesMap.get(s[i]) === parenthesesMemory.pop()) {
+                        answer = answer && true;
+                    } else {
+                        answer = answer && false;
+                    }
+                }
+            }
+
+            answer = parenthesesMemory.length > 0 ? false : answer;
+
+            console.log(answer);
+        })(s)
+    </script>
+</body>
+</html>

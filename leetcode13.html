@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        I             1
+        V             5
+        X             10
+        L             50
+        C             100
+        D             500
+        M             1000
+        */
+        let s = "MCMXCIV";
+        (function (s) {
+            let answer = 0;
+            let romanMap = new Map([
+                ['I', 1],
+                ['V', 5],
+                ['X', 10],
+                ['L', 50],
+                ['C', 100],
+                ['D', 500],
+                ['M', 1000],
+            ]);
+
+            // debugger
+
+            for(let i = 0; i < s.length; i++) {
+                if(i !== s.length-1 && romanMap.get(s[i]) < romanMap.get(s[i+1])) {
+                    if(s[i] === 'I' && (s[i+1] === 'V' || s[i+1] === 'X')) {
+                        answer += (romanMap.get(s[i+1]) - romanMap.get(s[i]))
+                    } else if(s[i] === 'X' && (s[i+1] === 'L' || s[i+1] === 'C')) {
+                        answer += (romanMap.get(s[i+1]) - romanMap.get(s[i]))
+                    } else if(s[i] === 'C' && (s[i+1] === 'D' || s[i+1] === 'M')) {
+                        answer += (romanMap.get(s[i+1]) - romanMap.get(s[i]))
+                    }
+                } else if(i === 0 || romanMap.get(s[i-1]) >= romanMap.get(s[i])) answer += romanMap.get(s[i]);
+            }
+
+            console.log(answer);
+        })(s)
+    
+    </script>
+</body>
+</html>

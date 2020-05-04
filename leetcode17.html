@@ -1,0 +1,165 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const digits = "";
+    function letterComb(index, current, result, mapping) {
+        if(index === digits.length) {
+            result.push(current);
+            return;
+        }
+
+        let letters = mapping[index];
+        for(let ch of letters) {
+            letterComb(index + 1, current + ch, result, mapping);
+        }
+    }
+    (function() {
+        let result = [];
+        if(digits === null || digits.length === 0) return result;
+        let phoneNumber = [
+            "abc",
+            "def",
+            "ghi",
+            "jkl",
+            "mno",
+            "pqrs",
+            "tuv",
+            "wxyz",
+        ];
+        let digits2Idx = new Array(digits.length).fill(0).map((el, i) => el = parseInt(digits[i])-2);
+        let editedPhoneNum = [];
+        for(let digit of digits2Idx) {
+            editedPhoneNum = editedPhoneNum.concat([phoneNumber[digit]]);
+        }
+        letterComb(0, "", result , editedPhoneNum);
+        console.log(result);
+    })();
+    /* (function(digits) {
+        function twoDigitAdd(arr1, arr2) {
+            let digitArr = [];
+            for(let i = 0; i < arr1.length; i++) {
+                for(let j = 0; j < arr2.length; j++) {
+                    digitArr.push(arr1[i] + arr2[j]);
+                }
+            }
+            return digitArr;
+        }
+
+        let phoneNumber = [
+            ["a", "b", "c"],
+            ["d", "e", "f"],
+            ["g", "h", "i"],
+            ["j", "k", "l"],
+            ["m", "n", "o"],
+            ["p", "q", "r", "s"],
+            ["t", "u", "v"],
+            ["w", "x", "y", "z"],
+        ];
+        let digits2Idx = new Array(digits.length).fill(0).map((el, i) => el = parseInt(digits[i])-2);        
+        let editedPhoneNum = [];
+        for(let digit of digits2Idx) editedPhoneNum = editedPhoneNum.concat([phoneNumber[digit]]);
+
+        let previousArr = editedPhoneNum.length > 0 ? editedPhoneNum[0] : [];
+
+        for(let i = 1; i < editedPhoneNum.length; i++) {
+            previousArr = twoDigitAdd(previousArr, editedPhoneNum[i]);
+        }
+
+        let answerArr = previousArr.length > 0 ? previousArr.concat() : [];
+
+        console.log(answerArr);
+    })(digits) */
+    /* (function(digits) {
+
+        let phoneNumber = [
+            ["a", "b", "c"],
+            ["d", "e", "f"],
+            ["g", "h", "i"],
+            ["j", "k", "l"],
+            ["m", "n", "o"],
+            ["p", "q", "r", "s"],
+            ["t", "u", "v"],
+            ["w", "x", "y", "z"],
+        ];
+        let digits2Idx = new Array(digits.length).fill(0).map((el, i) => el = parseInt(digits[i])-2);
+        
+        let answer = "";
+        let answerArr = [];
+        let idxArr = new Array(digits.length).fill(0);
+        let editedPhoneNum = [];
+        for(let digit of digits2Idx) editedPhoneNum = editedPhoneNum.concat([phoneNumber[digit]]);
+        let j = editedPhoneNum[editedPhoneNum.length-1].length-1;
+        let i = 0;
+        // let totalLoop = editedPhoneNum.reduce((a, el) => a *= el.length, 1);
+
+        for(let i = 0; i < editedPhoneNum.length; i++) {
+            while(j >= 0) {
+                answer += editedPhoneNum[i][idxArr[j]];
+                if(answer.length === digits.length) {
+                    answerArr.push(answer);
+                    answer === "";
+                }
+                if(i === j) {
+                    idxArr[j]++;
+                }
+                if(idxArr[j] > editedPhoneNum[j].length-1) {
+                    idxArr[j] = 0;
+                    idxArr[j--]++;
+                }
+                j--;
+            }
+            i++;
+        }
+        console.log(answerArr);
+    })(digits) */
+    /* (function(digits) {
+
+        let phoneNumber = [
+            ["a", "b", "c"],
+            ["d", "e", "f"],
+            ["g", "h", "i"],
+            ["j", "k", "l"],
+            ["m", "n", "o"],
+            ["p", "q", "r", "s"],
+            ["t", "u", "v"],
+            ["w", "x", "y", "z"],
+        ];
+        let digits2Idx = new Array(digits.length).fill(0).map((el, i) => el = parseInt(digits[i])-2);
+
+        let answer = "";
+        let answerArr = [];
+        let idxArr = new Array(digits.length).fill(0);
+        let editedPhoneNum = [];
+        for(let digit of digits2Idx) editedPhoneNum = editedPhoneNum.concat([phoneNumber[digit]])
+        
+        let curr = 0;
+        let idxPointer = idxArr.length-1;
+        while(idxArr[0] < editedPhoneNum[0].length) {
+            answer += editedPhoneNum[curr][idxArr[curr]];
+            if(curr >= idxArr.length-1) {
+                answerArr.push(answer);
+                answer = "";
+                idxArr[curr]++;
+                curr = -1;
+            }
+            if(idxArr[curr] >= editedPhoneNum[curr].length-1) {
+                if(idxPointer <= idxArr[idxPointer] && idxPointer-1 > 0) idxPointer--;
+                if(idxPointer-1 === 0) {
+                    idxArr[idxPointer--]++;
+                }
+                idxArr[curr] = 0;
+                idxArr[idxPointer]++;
+                curr = -1;
+            }
+            curr++;
+        }
+    })(digits) */
+    </script>
+</body>
+</html>

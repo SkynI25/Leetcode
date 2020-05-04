@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        (function () {
+            let strs = ["paw","dad","bog","day","day","mig","len","rat"];
+            let answer = [];
+
+            let map = new Map();
+            for(let str of strs) {
+                const s = str.split('').sort((a,b) => a > b ? 1 : a < b ? -1 : 0).join(''); // klogk
+                let l = map.get(s) || [];
+                l.push(str);
+                map.set(s, l);
+            }
+            answer = Array.from(map.values());
+
+            // for(let i = 0; i < strsCopy.length; i++) { // Nklogk
+            //     strsCopy[i] = strsCopy[i].split('').sort((a,b) => a > b ? 1 : a < b ? -1 : 0).join('');
+            // }
+
+            // let idxSet = new Set();
+            
+            // for(let strings of strsCopy) { // N^2
+            //     let word = strings;
+            //     let anagramSet = [];
+            //     for(let i = 0; i < strsCopy.length; i++) {
+            //         if((idxSet.size === 0 || idxSet.size > 0 && !idxSet.has(i)) && strsCopy[i] === word) {
+            //             anagramSet.push(i);
+            //             idxSet.add(i);
+            //         }
+            //     }
+            //     if(anagramSet.length > 0) {
+            //         answer.push(anagramSet.map(el => strs[el]));
+            //     }
+            // }
+
+            // strs.sort((a,b) => {
+            //     return a.length < b.length ? 1 : a.length > b.length ? -1 : 0;
+            // });
+
+            // while(strs.length > 0) {
+            //     let word = strs[0];
+            //     let hasAnagram = [];
+            //     let anagramSet = [];
+            //     let newInput = [];
+            //     if(word === "") {
+            //         for(let i = 0; i < strs.length; i++) {
+            //             if(strs[i] === word) {
+            //                 anagramSet.push(strs[i]);
+            //             } else {
+            //                 newInput.push(strs[i]);
+            //             }
+            //         }
+            //     } else {
+            //         strs.forEach((el, i) => {
+            //             hasAnagram[i] = 0;
+            //         });
+            //         hasAnagram[0] = word.length;
+            //         for(let i = 0; i < word.length; i++) {
+            //             for(let j = 1; j < strs.length; j++) {
+            //                 if(strs[j].indexOf(word[i]) > -1) {
+            //                     hasAnagram[j] += 1;
+            //                 }
+            //             }
+            //         }
+            //         for(let i = 0; i < hasAnagram.length; i++) {
+            //             if(hasAnagram[i] === word.length) {
+            //                 anagramSet.push(strs[i]);
+            //             } else {
+            //                 newInput.push(strs[i]);
+            //             }
+            //         }
+            //     }
+            //     strs = newInput;
+            //     answer.push(anagramSet);
+            // }
+            console.log(answer);
+        })();
+    </script>
+</body>
+</html>

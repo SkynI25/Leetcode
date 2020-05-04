@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let x = 1534236469;
+        
+        (function(x) {
+            let answerStr = "";
+            let numStr = x < 0 ? x.toString().substring(1, x.toString().length) : x.toString();
+            for(let i = numStr.length-1; i>=0; i--) {
+                answerStr += numStr[i];
+            }
+            answerStr = x < 0 ? '-' + answerStr : answerStr;
+            let answerNum = (Number(answerStr) <= 2147483647 && Number(answerStr) >= -2147483648) ? Number(answerStr) : 0;
+            
+            console.log(answerNum);
+        })(x);
+
+    </script>
+</body>
+</html>

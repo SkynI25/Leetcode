@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const n = 3;
+        function gParentheses(leftParensNeeded, rightParensNeeded, parenString, result) {
+            if(leftParensNeeded === 0 && rightParensNeeded === 0) {
+                result.push(parenString);
+                return;
+            }
+
+            if(leftParensNeeded > 0) {
+                gParentheses(leftParensNeeded-1, rightParensNeeded, parenString+"(", result);
+            }
+
+            if(leftParensNeeded < rightParensNeeded) {
+                gParentheses(leftParensNeeded, rightParensNeeded-1, parenString+")", result);
+            }
+        }
+        (function() {
+            let result = [];
+            let numPairs = n;
+            gParentheses(numPairs, numPairs, "", result);
+
+            console.log(result);
+        })();
+    </script>
+</body>
+</html>

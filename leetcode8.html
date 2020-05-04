@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = "+1";
+
+        // 4193 with words
+        //    -42
+        // words and 987
+        // -91283472332
+        // +
+        // -
+        // ' '
+
+        // debugger
+        (function(str) {
+            let strParam = str.trim();
+            let answerStr = "";
+            for(let i = 0; i < strParam.length; i++) {
+                if((i === 0 && !strParam[i].match(/\v|-|\+|\d/g)) || (i !== 0 && !strParam[i].match(/\d/g))) break;
+                // if(strParam[i].match(/-|\+/g) && checkHipen) {
+                //     checkHipen = false;
+                // }
+                answerStr += strParam[i]
+                // if(str[i].match(/-|\d/g)) console.log(str[i])
+            }
+            answerStr = answerStr === "+" || answerStr === "-" ? "" : answerStr;
+            let answerNum = Number(answerStr) < -2147483648 ? -2147483648 : Number(answerStr) > 2147483647 ? 2147483647 : Number(answerStr);
+
+            console.log(answerNum);
+        })(str)
+    </script>
+</body>
+</html>
