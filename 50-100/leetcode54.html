@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const matrix = [
+  [1, 2, 3, 4, 101],
+  [5, 6, 7, 8, 102],
+  [9,10,11,12, 103],
+  [201, 202, 203, 204, 205],
+];
+        (function () {
+            const answer = [];
+            if(matrix.length > 0) {
+                let iBound = matrix[0].length-1;
+                let jBound = 0;
+
+                let i = jBound;
+                let j = iBound;
+
+                let col1Bound = matrix.length-1;
+                let col2Bound = jBound+1;
+
+                let col1 = 0;
+                let col2 = col1Bound;
+
+                let matrixLength = matrix.length * matrix[0].length;
+
+                while(matrixLength > 0) {
+                    if(i < iBound) {
+                        answer.push(matrix[col1][i]);
+                        i++;
+                    } else if(i >= iBound && col1 < col1Bound) {
+                        answer.push(matrix[col1][i]);
+                        col1++;
+                    } else if(j > jBound && col1 >= col1Bound) {
+                        answer.push(matrix[col1][j]);
+                        j--;
+                    } else if(j <= jBound && col2 > col2Bound) {
+                        answer.push(matrix[col2][j]);
+                        col2--;
+                    } else {
+                        answer.push(matrix[col2][j]);
+                        iBound--;
+                        col1Bound--;
+                        jBound++;
+                        col1 = col2Bound;
+                        col2Bound++;
+                        
+                        i = jBound;
+                        j = iBound;
+                        col2 = col1Bound;
+                    }
+                    matrixLength--;
+                }
+            }
+            console.log(answer);
+        })();
+    
+    </script>
+</body>
+</html>
