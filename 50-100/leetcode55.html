@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [2,3,0,0,1,4,0,3,0,0,0];
+
+        (function () {
+            let newArr = nums.slice(0, nums.length-1);
+            let answer = false;
+            if(nums.length < 2) {
+                answer = true;
+                return answer;
+            } else if(nums[0] === 0 && nums.length >= 2) {
+                console.log(answer);
+                return answer;
+            } else {
+                let lastIndex = nums.length-1;
+                for(let i = newArr.length-1; i >=0; i--) {
+                    if(newArr[i] >= lastIndex - i) {
+                        answer = true;
+                        lastIndex = i;
+                    } else {
+                        answer = false;
+                    }
+                }
+            }
+            console.log(answer);
+        })();
+    </script>
+</body>
+</html>
