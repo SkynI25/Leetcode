@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let digits = [9];
+        (function () {
+            let array2Num = Number(digits.join(""));
+            if(array2Num+'' === digits.join("")) {
+                return `${array2Num+1}`.split("");
+            } else {
+                let carry = 0;
+                for(let i = digits.length-1; i >= 0; i--) {
+                    if(i === digits.length-1 || carry > 0) {
+                        digits[i] += 1;
+                        carry = 0;
+                    }
+                    if(digits[i] === 10) {
+                        digits[i] = 0;
+                        carry = 1;
+                    }
+                    if(i === 0 && carry > 0) {
+                        digits.unshift(carry);
+                    }
+                }
+            }
+            console.log(digits);
+            return digits;
+        })();
+    </script>
+</body>
+</html>
