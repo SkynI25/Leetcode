@@ -2,7 +2,67 @@ let s = "ADODEABCA";
 let t = "AABC";
 
 (function() {
-    debugger
+    // optimized solution
+    let ans = [-1, 0, 0];
+    if(s.length === 0 || t.length === 0) {
+        return "";
+    }
+    
+    let dictMap = new Map();
+    t.split("").forEach(el => {
+        let num = dictMap.get(el) ? dictMap.get(el) : 0;
+        dictMap.set(el, num+1);
+    });
+    
+    let filteredS = [];
+    for(let i = 0; i < s.length; i++) {
+        let char = s[i];
+        if(dictMap.has(char)) {
+            filteredS.push([i, char]);
+        }
+    }
+
+    let r = 0;
+    let l = 0;
+    let required = dictMap.size;
+    let form = 0;
+
+    let windowMap = new Map();
+
+    while(r < filteredS.length) {
+        let char = filteredS[r][1];
+        let count = windowMap.get(char) ? windowMap.get(char) : 0;
+        windowMap.set(char, count+1);
+
+        if(dictMap.has(char) && windowMap.get(char) === dictMap.get(char)) {
+            form++;
+        }
+
+        while(l <= r && required === form) {
+            char = filteredS[l][1];
+            
+            let end = filteredS[r][0];
+            let start = filteredS[l][0];
+            if(ans[0] === -1 || ans[0] > end - start + 1) {
+                ans[0] = end - start + 1;
+                ans[1] = start;
+                ans[2] = end;
+            }
+
+            let count = windowMap.get(char);
+            windowMap.set(char, count-1);
+            if(dictMap.has(char) && windowMap.get(char) < dictMap.get(char)) {
+                form--;
+            }
+            l++;
+        }
+        r++;
+    }
+
+    return ans[0] === -1 ? "" : s.slice(ans[1], ans[2]+1);
+    
+    // solution 1
+    /*
     let ans = [-1, 0, 0];
     if(s.length === 0 || t.length === 0) {
         return "";
@@ -48,7 +108,7 @@ let t = "AABC";
         r++;
     }
 
-    return ans[0] === -1 ? "" : s.slice(ans[1], ans[2]+1);
+    return ans[0] === -1 ? "" : s.slice(ans[1], ans[2]+1); */
 })();
 
 /* first solution 
