@@ -1,4 +1,4 @@
-let nums = [0];
+let nums = [1,2,3];
 
 (function () {
     // backtracking
