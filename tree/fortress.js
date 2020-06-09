@@ -35,10 +35,10 @@
         return true;
     }
 
-    debugger
     let longest = 0;
     let ret = getTree(root);
-
+    
+    debugger
     function height(root) {
         let heights = [];
         for(let i = 0; i < root[0].length; ++i) {
