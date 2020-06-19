@@ -10,31 +10,31 @@ function TreeNode(val, left, right) {
 (function () {
     function solve(tree, preorder) {
         if(tree.length === 0) {
-            return;
+            return null;
         }
         let rootVal = preorder.shift();
-        let root = new TreeNode(rootVal, null, null);
+        let root = new TreeNode(rootVal);
         let rootIndex = tree.indexOf(rootVal);
         let leftSub = tree.slice(0, rootIndex);
-        let rightSub = tree.slice(rootIndex, tree.length);
+        let rightSub = tree.slice(rootIndex+1, tree.length);
 
-        root.left = leftSub.length > 0 ? solve(leftSub, preorder) : undefined;
-        root.right = rightSub.length > 0 ? solve(rightSub, preorder) : undefined;
+        root.left = solve(leftSub, preorder);
+        root.right = solve(rightSub, preorder);
 
         return root;
     }
     if(preorder.length === 0 || inorder.length === 0) {
-        return [];
+        return null;
     }
     let rootVal = preorder.shift();
-    let root = new TreeNode(rootVal, null, null);
+    let root = new TreeNode(rootVal);
 
     let rootIndex = inorder.indexOf(rootVal);
     let leftSub = inorder.slice(0, rootIndex);
-    let rightSub = inorder.slice(rootIndex, inorder.length);
+    let rightSub = inorder.slice(rootIndex+1, inorder.length);
     while(preorder.length > 0) {
-        root.left = leftSub.length > 0 ? solve(leftSub, preorder) : undefined;
-        root.right = rightSub.length > 0 ? solve(rightSub, preorder) : undefined;
+        root.left = solve(leftSub, preorder);
+        root.right = solve(rightSub, preorder);
     }
 
     return root;
