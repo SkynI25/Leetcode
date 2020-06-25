@@ -1,3 +1,6 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12982
+// 예산
+
 let d = [1,3,2,5,4];
 let budget = 9;
 
