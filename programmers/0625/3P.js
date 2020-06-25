@@ -1,3 +1,6 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12981
+// 영어 끝말잇기
+
 let n = 10;
 let words = ["tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"];
 //["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"];
