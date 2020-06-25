@@ -1,3 +1,6 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12987
+// 숫자 게임
+
 let A = [5,1,10,7];
 let B = [2,2,6,7];
 
