@@ -1,3 +1,6 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12979
+// 기지국 설치하기
+
 let n = 11;
 let stations = [4,11];
 let w = 1;
