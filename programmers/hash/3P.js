@@ -13,6 +13,7 @@ const clothes = [["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["g
             clothesMap.set(clothes[i][1],[clothes[i][0]]);
         }
     }
+    // (A+1)(B+1)(C+1) = ABC + AB + BC + AC + A + B + C + 1
     answer = [...clothesMap.entries()].reduce((a,h) => a *= h[1].length+1, 1);
     
     return answer - 1;
