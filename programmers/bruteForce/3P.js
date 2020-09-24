@@ -1,15 +1,16 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42842
-let brown = 10;
-let yellow = 2;
+let brown = 50;
+let yellow = 22;
 (function () {
-    const result = [];
-    const x = (brown-4)/2;
-    for (let i=1; i<=x; i++) {
-        if (i * (x-i) === red) {
-            result.push(x-i+2);
-            result.push(i+2);
+    let oneSide = (brown-4)/2;
+    let answer = [];
+    for(let i = 1; i <= oneSide; i++) {
+        let horizontal = oneSide - i;
+        let vertical = i;
+        if((brown + yellow) === (horizontal+2) * (vertical+2) && horizontal >= vertical) {
+            answer = [horizontal+2, vertical+2];
             break;
         }
     }
-    return result;
+    return answer;
 })();
