@@ -1,81 +1,69 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 (function () {
-    let numbers = "17";
+    let numbers = "1234";
+    let numbersArr = numbers.split("");
+    let includes = numbersArr.map(num => !num);
+    let answer = 0;
+    const dataSet = new Set();
+    const primeSet = new Set();
     const isPrime = num => {
         if (num < 2) return false;
         if (num === 2) return true;
-            for (var i = 2; i <= Math.sqrt(num); i++) {
-                if (num%i===0) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+                return false;
             }
+        }
         return true;
     };
     
-    const numSet = new Set();
-    const permutation = (numArr, subStr) => {
-        debugger
-        numSet.add(Number(subStr));
-        
-        if (numArr.length > 0) {
-            for (let i in numArr) {
-                const temp = numArr.slice(0);
-                temp.splice(i, 1);
-                permutation(temp, subStr.concat(numArr[i]));
-            }
+    const permutation = (k) => {
+        if(k === numbersArr.length) {
+            dataSet.add(numbersArr.join(""));
         }
-        return numSet;
+        for(let i = k; i < numbersArr.length; i++) {
+            swap(numbersArr, k, i);
+            permutation(k+1);
+            swap(numbersArr, k, i);
+        }
     }
-    
-    const solution = numbers => {
-        let answer = 0;
-        const num = numbers.split("");
-        
-        const result = permutation(num, "")
-        result.forEach((num) => {
-            if(isPrime(num)){
-                answer ++;
+
+    const powerset = (k, arr) => {
+        if(k === arr.length) {
+            let temp = "";
+            for(let i = 0; i < arr.length; i++) {
+                if(includes[i]) {
+                    temp += arr[i];
+                }
             }
-        })
-        return answer;
+            return temp !== "" && primeSet.add(parseInt(temp));
+        }
+        includes[k] = false;
+        powerset(k+1, arr);
+        includes[k] = true;
+        powerset(k+1, arr);
     }
-    // function isPrime(number) {
-    //     if(number < 2) {
-    //         return false;
-    //     }
-    //     if(number === 2) {
-    //         return true;
-    //     }
-    //     for(let i = 2; i <= Math.sqrt(number); i++) {
-    //         if(number % i === 0) {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
 
-    // const numSet = new Set();
-    // function permutation(numArr, substr) {
-    //     debugger
-    //     numSet.add(Number(substr));
+    const swap = (data, k, n) => {
+        let temp = data[k];
+        data[k] = data[n];
+        data[n] = temp;
+    }
 
-    //     if(numArr.length > 0) {
-    //         numArr.forEach((num, i) => {
-    //             permutation(numArr.slice(0).splice(i,1), substr.concat(numArr[i]));
-    //         })
-    //     }
-    //     return numSet;
-    // }
+    permutation(0);
+    for(let data of dataSet) {
+        primeSet.add(parseInt(data));
+        powerset(0, data);
+    }
+    console.log(primeSet);
 
-    // function solution(numbers) {
-    //     let answer = 0;
-        
-    //     const result = permutation(numbers.split(""), "");
-    //     result.forEach(num => {
-    //         if(isPrime(num)) {
-    //             answer++;
-    //         }
-    //     })
-    //     return answer;
-    // }
+    debugger
+    [...primeSet].forEach((el) => {
+        if(isPrime(el)) {
+            answer++;
+        }
+    });
 
-    solution(numbers);
+    console.log(answer);
+    return answer;
 })();
