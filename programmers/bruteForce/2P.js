@@ -52,12 +52,10 @@
 
     permutation(0);
     for(let data of dataSet) {
-        primeSet.add(parseInt(data));
         powerset(0, data);
     }
     console.log(primeSet);
 
-    debugger
     [...primeSet].forEach((el) => {
         if(isPrime(el)) {
             answer++;
