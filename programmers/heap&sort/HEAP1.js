@@ -1,6 +1,7 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42627
 let jobs= [[0, 3], [1, 9], [2, 6]];
 (function () {
+    debugger
     let total = jobs.length;
     let answer = 0;
     let waitTime = 0;
