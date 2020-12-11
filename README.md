@@ -1,2 +1,2 @@
 # Leetcode
-Leetcode problem solutions created by Skyni25
+Leetcode problem solutions created by SkynI25
